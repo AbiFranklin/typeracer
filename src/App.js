@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import './App.css'
 
 const App = () => {
   const SNIPPETS = [
@@ -31,10 +32,10 @@ const App = () => {
   return (
     <div>
       <h2>Type Racer</h2>
+      <h3>{gameState.victory ? `Done! 🎉 Time: ${gameState.endTime} seconds ... choose a new challenge` : 'Copy the text as fast as you can...'}</h3>
       <hr />
-      <h3>Snippet</h3>
-      {snippet}
-      <h4>{gameState.victory ? `Done! 🎉 Time: ${gameState.endTime} seconds` : null}</h4>
+      <h3>Text: {snippet}</h3>
+      
       <input value={userText} onChange={updateUserText} />
       <hr />
       {SNIPPETS.map((SNIPPET, index) => (
