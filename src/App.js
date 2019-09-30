@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import './App.css'
+import stringSimilarity from 'string-similarity'
 
 const App = () => {
   const SNIPPETS = [
@@ -12,10 +13,16 @@ const App = () => {
   const [userText, setUserText] = useState('');
   const [gameState, setGameState] = useState(INITIAL_GAME_STATE);
 
+  const sim = (a, b) => {
+    let correctness = stringSimilarity.compareTwoStrings(a, b);
+    let percentDone = a.length / b.length
+
+    return correctness * percentDone
+  }
   // gameState.victory and gameState.endTime updated when target.value === snippet
   const updateUserText = e => {
     setUserText(e.target.value);
-    console.log('Current User Text', userText);
+    console.log('Similarity', sim(e.target.value, snippet));
 
     if (e.target.value === snippet) {
       setGameState({ ...gameState, victory: true, endTime: (new Date().getTime() - gameState.startTime)/1000 })
