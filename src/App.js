@@ -35,7 +35,10 @@ const App = () => {
   const chooseSnippet = snippetIndex => () => {
     console.log('set snippet', snippetIndex);
     setSnippet(SNIPPETS[snippetIndex]);
-    setGameState({... gameState, startTime: new Date().getTime() })
+    setGameState({... gameState, startTime: new Date().getTime(), victory: false })
+    setCompletion(0)
+    setUserText('')
+
   };
 
   var width = {width: `${completion}%`}
