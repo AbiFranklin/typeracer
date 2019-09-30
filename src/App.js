@@ -38,7 +38,7 @@ const App = () => {
     setGameState({... gameState, startTime: new Date().getTime(), victory: false })
     setCompletion(0)
     setUserText('')
-
+    document.getElementById("input").focus();
   };
 
   var width = {width: `${completion}%`}
@@ -58,14 +58,20 @@ const App = () => {
       <hr />
       <h3>Text: {snippet}</h3>
       
-      <input value={userText} onChange={updateUserText} />
+      <input id="input" value={userText} onChange={updateUserText} />
       <hr />
-      {SNIPPETS.map((SNIPPET, index) => (
-        // refactor SNIPPETS to include ids
-        <button onClick={chooseSnippet(index)} key={index}>
-        {SNIPPET.substring(0, 10)}...
-        </button>
-      ))}
+
+      <div className="dropdown btn primary">
+        <div>Typing Challenges</div>
+          <ul className="dropdown-menu">
+          {SNIPPETS.map((SNIPPET, index) => (
+          // refactor SNIPPETS to include ids
+          <li><a onClick={chooseSnippet(index)} key={index}>
+          {SNIPPET.substring(0, 10)}...
+          </a></li>
+          ))}
+        </ul>
+      </div>
     </div>
   )
 }
