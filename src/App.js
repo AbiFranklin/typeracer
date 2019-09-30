@@ -6,17 +6,26 @@ const App = () => {
     "What's Forrest Gump's password? 1Forrest1",
     'Where do programmers like to hangout? The Foo Bar'
   ];
+  const INITIAL_GAME_STATE = { victory: false, startTime: null, endTime: null }
   const [snippet, setSnippet] = useState('');
   const [userText, setUserText] = useState('');
+  const [gameState, setGameState] = useState(INITIAL_GAME_STATE);
 
+  // gameState.victory and gameState.endTime updated when target.value === snippet
   const updateUserText = e => {
     setUserText(e.target.value);
     console.log('Current User Text', userText);
+
+    if (e.target.value === snippet) {
+      setGameState({ ...gameState, victory: true, endTime: new Date().getTime() - gameState.startTime})
+    }
   }
 
+  // gameState.startTime updated with selection of snippet
   const chooseSnippet = snippetIndex => () => {
     console.log('set snippet', snippetIndex);
     setSnippet(SNIPPETS[snippetIndex]);
+    setGameState({... gameState, startTime: new Date().getTime() })
   };
 
   return (
