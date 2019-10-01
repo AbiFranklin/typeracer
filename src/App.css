@@ -24,4 +24,29 @@
 h2 {
   font-family: 'Faster One', cursive;
   font-size: 78px;
+  text-align: center;
+}
+
+.container {
+  width: 60%;
+  height: 75vh;
+  background-color: #ffbb33;
+  box-shadow: 10px 10px 32px 0px rgba(196,188,196,1);
+}
+
+#header {
+  text-align: center;
+}
+
+#input {
+  width: 100%;
+}
+
+#newChallenge {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+#drop {
+  margin-bottom: 50px;
 }

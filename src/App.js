@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import './App.css'
 import stringSimilarity from 'string-similarity'
 
@@ -6,7 +6,7 @@ const App = () => {
   const SNIPPETS = [
     'Bears, beets, battlestar galactica',
     "What's Forrest Gump's password? 1Forrest1",
-    'Where do programmers like to hangout? The Foo Bar', "Abi"
+    'Where do programmers like to hangout? The Foo Bar',
   ];
   const INITIAL_GAME_STATE = { victory: false, startTime: null, endTime: null }
   const [snippet, setSnippet] = useState('');
@@ -32,14 +32,23 @@ const App = () => {
     }
   }
 
+  useEffect(() => {
+    if (gameState.victory) {
+      document.title = 'Victory!'}
+    else {
+      document.title="Type Racer - Go!"
+    }
+  });
+
   // gameState.startTime updated with selection of snippet
   const chooseSnippet = snippetIndex => () => {
     console.log('set snippet', snippetIndex);
-    setSnippet(SNIPPETS[snippetIndex]);
+    setSnippet(challenges[snippetIndex]);
     setGameState({... gameState, startTime: new Date().getTime(), victory: false })
     setCompletion(0)
     setUserText('')
     document.getElementById("input").focus();
+    document.getElementById("drop").blur();
   };
 
 
@@ -47,9 +56,9 @@ const App = () => {
   var width = {width: `${completion}%`}
 
   return (
-    <div>
+    <div className="container">
       <h2>Type Racer</h2>
-      <h3>{gameState.victory ? `Done! 🎉 Time: ${gameState.endTime} seconds ... choose a new challenge` : 'Copy the text as fast as you can...'}</h3>
+      <h3 id="header">{gameState.victory ? `Done! 🎉 Time: ${gameState.endTime} seconds ... choose a new challenge` : 'Choose a challenge and copy the text as fast as you can...'}</h3>
       {gameState.victory ? 
       <div className="progress success">
         <div className="progress-bar striped animated-stripe" style={width}></div>
@@ -64,20 +73,22 @@ const App = () => {
       <input id="input" value={userText} onChange={updateUserText} />
       <hr />
 
-      <div className="dropdown btn primary">
+      <div className="dropdown btn secondary" id="drop">
         <div>Typing Challenges</div>
           <ul className="dropdown-menu">
-          {challenges.map((SNIPPET, index) => (
+          {challenges.map((challenge, index) => (
           // refactor SNIPPETS to include ids
           <li><a onClick={chooseSnippet(index)} key={index}>
-          {SNIPPET.substring(0, 10)}...
+          {challenge.substring(0, 10)}...
           </a></li>
           ))}
         </ul>
       </div>
       <h3>Or add a challenge... </h3>
       <input id="newChallenge" />
-      <button className="btn primary" onClick={() => setChallenges([...challenges, document.getElementById("newChallenge").value])}>Add Challenge</button>
+      <button className="btn secondary" onClick={() => {
+        setChallenges([...challenges, document.getElementById("newChallenge").value]);
+        document.getElementById("newChallenge").value = ''}}>Add Challenge</button>
     </div>
   )
 }
