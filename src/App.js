@@ -6,13 +6,14 @@ const App = () => {
   const SNIPPETS = [
     'Bears, beets, battlestar galactica',
     "What's Forrest Gump's password? 1Forrest1",
-    'Where do programmers like to hangout? The Foo Bar'
+    'Where do programmers like to hangout? The Foo Bar', "Abi"
   ];
   const INITIAL_GAME_STATE = { victory: false, startTime: null, endTime: null }
   const [snippet, setSnippet] = useState('');
   const [userText, setUserText] = useState('');
   const [gameState, setGameState] = useState(INITIAL_GAME_STATE);
   const [completion, setCompletion] = useState(null);
+  const [challenges, setChallenges] = useState(SNIPPETS)
 
   const sim = (a, b) => {
     let correctness = stringSimilarity.compareTwoStrings(a, b);
@@ -41,6 +42,8 @@ const App = () => {
     document.getElementById("input").focus();
   };
 
+
+
   var width = {width: `${completion}%`}
 
   return (
@@ -64,7 +67,7 @@ const App = () => {
       <div className="dropdown btn primary">
         <div>Typing Challenges</div>
           <ul className="dropdown-menu">
-          {SNIPPETS.map((SNIPPET, index) => (
+          {challenges.map((SNIPPET, index) => (
           // refactor SNIPPETS to include ids
           <li><a onClick={chooseSnippet(index)} key={index}>
           {SNIPPET.substring(0, 10)}...
@@ -72,6 +75,9 @@ const App = () => {
           ))}
         </ul>
       </div>
+      <h3>Or add a challenge... </h3>
+      <input id="newChallenge" />
+      <button className="btn primary" onClick={() => setChallenges([...challenges, document.getElementById("newChallenge").value])}>Add Challenge</button>
     </div>
   )
 }
