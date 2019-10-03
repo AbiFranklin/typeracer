@@ -48,7 +48,6 @@ const App = () => {
     setCompletion(0)
     setUserText('')
     document.getElementById("input").focus();
-    document.getElementById("drop").blur();
   };
 
 
@@ -75,7 +74,7 @@ const App = () => {
 
       <div className="dropdown btn secondary" id="drop">
         <div>Typing Challenges</div>
-          <ul className="dropdown-menu">
+          <ul className="dropdown-menu" id="dropdown-menu">
           {challenges.map((challenge, index) => (
           // refactor SNIPPETS to include ids
           <li><a onClick={chooseSnippet(index)} key={index}>

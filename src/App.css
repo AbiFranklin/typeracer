@@ -1,35 +1,20 @@
+body {font-size: 62.5%}
+
+p {font-size: 1.8rem}
+
 .App {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #09d3ac;
-}
-
 h2 {
   font-family: 'Faster One', cursive;
-  font-size: 78px;
+  font-size: 7.8rem;
   text-align: center;
 }
 
 .container {
   width: 60%;
-  height: 75vh;
+  padding-bottom: 30px;
   background-color: #ffbb33;
   box-shadow: 10px 10px 32px 0px rgba(196,188,196,1);
 }
@@ -49,4 +34,23 @@ h2 {
 
 #drop {
   margin-bottom: 50px;
+}
+
+.btn {
+  font-size: 1.2rem;
+}
+
+input {
+  line-height: 2.8rem;
+  font-size: 1.4rem;
+}
+
+@media only screen and (max-width: 900px) {
+  .container {
+    width: 100%;
+  }
+
+  h2 {
+    font-size: 2.4rem
+  }
 }
